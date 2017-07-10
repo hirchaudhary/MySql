@@ -1,0 +1,42 @@
+USE world;
+
+#Query 1
+SELECT countries.name, languages.language, languages.percentage FROM countries
+JOIN languages ON languages.country_id = countries.id 
+WHERE language = "Slovene" 
+GROUP BY languages.percentage DESC;
+
+#Query 2
+SELECT countries.name, COUNT(cities.name) as numbers FROM countries
+JOIN cities ON cities.country_id = countries.id 
+GROUP BY name
+ORDER BY numbers DESC;
+
+#Query 3
+SELECT cities.name, cities.population FROM countries
+JOIN cities ON cities.country_id = countries.id 
+WHERE countries.name = "Mexico" AND  cities.population > 500000;
+
+#Query 4
+SELECT countries.name, languages.language, languages.percentage FROM countries
+LEFT JOIN languages ON languages.country_id = countries.id 
+WHERE languages.percentage > 89
+ORDER BY languages.percentage DESC;
+
+#Query 5
+SELECT name, surface_area, population FROM countries
+WHERE  surface_area < 501 and population > 100000;
+
+#Query 6
+SELECT name, government_form, capital, life_expectancy FROM countries
+WHERE  government_form = "Constitutional Monarchy" AND capital > 200 and life_expectancy > 75;
+
+#Query 7
+SELECT countries.name, cities.name, cities.district, cities.population FROM countries
+JOIN cities ON cities.country_id = countries.id 
+WHERE countries.name = "Argentina" AND  cities.district = "Buenos Aires" AND cities.population > 500000;
+
+#Query 8
+SELECT region, COUNT(name) AS countries FROM countries
+GROUP BY region
+ORDER BY countries DESC;
